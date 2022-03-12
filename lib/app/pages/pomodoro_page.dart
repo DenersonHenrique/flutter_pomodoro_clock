@@ -29,14 +29,22 @@ class PomodoroPage extends StatelessWidget {
                   TimeEntry(
                     value: controller.workTime,
                     title: AppString.workTime,
-                    decrement: controller.decrementWorkTime,
-                    increment: controller.incrementWorkTime,
+                    decrement: controller.initiated && controller.isWork()
+                        ? null
+                        : controller.decrementWorkTime,
+                    increment: controller.initiated && controller.isWork()
+                        ? null
+                        : controller.incrementWorkTime,
                   ),
                   TimeEntry(
                     value: controller.pauseTime,
                     title: AppString.pauseTime,
-                    decrement: controller.decrementPauseTime,
-                    increment: controller.incrementPauseTime,
+                    decrement: controller.initiated && controller.isPause()
+                        ? null
+                        : controller.decrementPauseTime,
+                    increment: controller.initiated && controller.isPause()
+                        ? null
+                        : controller.incrementPauseTime,
                   ),
                 ],
               ),

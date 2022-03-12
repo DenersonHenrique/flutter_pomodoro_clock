@@ -114,22 +114,22 @@ mixin _$PomodoroController on _PomodoroControllerBase, Store {
   }
 
   @override
-  void restart() {
+  void stop() {
     final _$actionInfo = _$_PomodoroControllerBaseActionController.startAction(
-        name: '_PomodoroControllerBase.restart');
+        name: '_PomodoroControllerBase.stop');
     try {
-      return super.restart();
+      return super.stop();
     } finally {
       _$_PomodoroControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void stop() {
+  void restart() {
     final _$actionInfo = _$_PomodoroControllerBaseActionController.startAction(
-        name: '_PomodoroControllerBase.stop');
+        name: '_PomodoroControllerBase.restart');
     try {
-      return super.stop();
+      return super.restart();
     } finally {
       _$_PomodoroControllerBaseActionController.endAction(_$actionInfo);
     }

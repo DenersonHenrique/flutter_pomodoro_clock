@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:mobx/mobx.dart';
+
 part 'pomodoro_controller.g.dart';
 
 class PomodoroController = _PomodoroControllerBase with _$PomodoroController;
@@ -22,30 +24,86 @@ abstract class _PomodoroControllerBase with Store {
   int pauseTime = 1;
 
   @observable
-  IntervalType intervalType = IntervalType.pause;
+  IntervalType intervalType = IntervalType.work;
+
+  Timer? timer;
 
   @action
-  void start() => initiated = true;
+  void start() {
+    initiated = true;
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (minutes == 0 && seconds == 0) {
+        _chanceIntervalType();
+      } else if (seconds == 0) {
+        seconds = 59;
+        minutes--;
+      } else {
+        seconds--;
+      }
+    });
+  }
 
   @action
-  void restart() => initiated = false;
+  void stop() {
+    initiated = false;
+    timer?.cancel();
+  }
 
   @action
-  void stop() => initiated = true;
+  void restart() {
+    stop();
+    minutes = isWork() ? workTime : pauseTime;
+    seconds = 0;
+  }
 
   @action
-  void incrementWorkTime() => workTime++;
+  void incrementWorkTime() {
+    workTime++;
+    if (isWork()) {
+      restart();
+    }
+  }
 
   @action
-  void decrementWorkTime() => workTime--;
+  void decrementWorkTime() {
+    if (workTime > 1) {
+      workTime--;
+      if (isWork()) {
+        restart();
+      }
+    }
+  }
 
   @action
-  void incrementPauseTime() => pauseTime++;
+  void incrementPauseTime() {
+    pauseTime++;
+    if (isPause()) {
+      restart();
+    }
+  }
 
   @action
-  void decrementPauseTime() => pauseTime--;
+  void decrementPauseTime() {
+    if (pauseTime > 1) {
+      pauseTime--;
+      if (isPause()) {
+        restart();
+      }
+    }
+  }
 
   bool isWork() => intervalType == IntervalType.work;
 
   bool isPause() => intervalType == IntervalType.pause;
+
+  void _chanceIntervalType() {
+    if (isWork()) {
+      intervalType = IntervalType.pause;
+      minutes = pauseTime;
+    } else {
+      intervalType = IntervalType.work;
+      minutes = workTime;
+    }
+    seconds = 0;
+  }
 }
