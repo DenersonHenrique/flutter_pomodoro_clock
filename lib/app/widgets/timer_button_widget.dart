@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class TimerButtonWidget extends StatelessWidget {
   final String text;
   final IconData icon;
+  final void Function()? onClick;
 
   const TimerButtonWidget({
     Key? key,
     required this.text,
     required this.icon,
+    required this.onClick,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class TimerButtonWidget extends StatelessWidget {
           ),
           textStyle: const TextStyle(fontSize: 25.0),
         ),
-        onPressed: () {},
+        onPressed: onClick,
         child: Row(
           children: <Widget>[
             Padding(

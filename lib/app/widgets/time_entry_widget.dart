@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 class TimeEntry extends StatelessWidget {
   final int value;
   final String title;
+  final void Function()? increment;
+  final void Function()? decrement;
 
   const TimeEntry({
     required this.value,
     required this.title,
+    required this.increment,
+    required this.decrement,
     Key? key,
   }) : super(key: key);
 
@@ -25,7 +29,7 @@ class TimeEntry extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: () {},
+                onPressed: decrement,
                 child: const Icon(
                   Icons.remove,
                   color: Color(0xFFFFFFFF),
@@ -43,7 +47,7 @@ class TimeEntry extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: increment,
                 child: const Icon(
                   Icons.add,
                   color: Color(0xFFFFFFFF),

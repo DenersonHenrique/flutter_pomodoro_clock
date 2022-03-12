@@ -8,4 +8,6 @@ class AppString {
   static String stopLabel = 'Parar';
   static String startLabel = 'Iniciar';
   static String restartLabel = 'Reiniciar';
+  static String timeWorkLabel = 'Hora de Trabalhar!';
+  static String timePauseLabel = 'Hora de Descansar!';
 }
