@@ -15,9 +15,7 @@ class TimerWidget extends StatelessWidget {
     return Observer(
       builder: (context) {
         return Container(
-          color: controller.isWork()
-              ? const Color(0xFFF44336)
-              : const Color(0xFF4CAF50),
+          color: controller.changeColor(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -27,7 +25,7 @@ class TimerWidget extends StatelessWidget {
                     : AppString.timePauseLabel,
                 style: const TextStyle(
                   fontSize: 40.0,
-                  color: Colors.white,
+                  color: Color(0xFFFFFFFF),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -35,7 +33,7 @@ class TimerWidget extends StatelessWidget {
                 '${controller.minutes.toString().padLeft(2, '0')}:${controller.seconds.toString().padLeft(2, '0')}',
                 style: const TextStyle(
                   fontSize: 120.0,
-                  color: Colors.white,
+                  color: Color(0xFFFFFFFF),
                 ),
               ),
               const SizedBox(height: 20.0),

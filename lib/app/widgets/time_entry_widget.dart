@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class TimeEntry extends StatelessWidget {
   final int value;
   final String title;
+  final Color color;
   final void Function()? increment;
   final void Function()? decrement;
 
   const TimeEntry({
     required this.value,
     required this.title,
+    required this.color,
     required this.increment,
     required this.decrement,
     Key? key,
@@ -37,7 +39,7 @@ class TimeEntry extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),
                   padding: const EdgeInsets.all(15.0),
-                  primary: const Color(0xFFF44336),
+                  primary: color,
                 ),
               ),
               Text(
@@ -55,7 +57,7 @@ class TimeEntry extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),
                   padding: const EdgeInsets.all(15.0),
-                  primary: const Color(0xFFF44336),
+                  primary: color,
                 ),
               ),
             ],

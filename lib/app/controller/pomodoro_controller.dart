@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:mobx/mobx.dart';
+import 'package:flutter/material.dart';
 
 part 'pomodoro_controller.g.dart';
 
@@ -95,6 +96,9 @@ abstract class _PomodoroControllerBase with Store {
   bool isWork() => intervalType == IntervalType.work;
 
   bool isPause() => intervalType == IntervalType.pause;
+
+  Color changeColor() =>
+      isWork() ? const Color(0xFFF44336) : const Color(0xFF4CAF50);
 
   void _chanceIntervalType() {
     if (isWork()) {
